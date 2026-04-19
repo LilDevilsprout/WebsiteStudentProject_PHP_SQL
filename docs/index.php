@@ -1,16 +1,33 @@
+<?php 
+    require "connexion.php";
+
+    $sql = "SELECT * FROM pokemons";
+
+    $triAutorise = ["nom", "rang"];
+    if (isset($_GET["tri"]) && in_array($_GET["tri"], $triAutorise)) {
+        $tri = $_GET["tri"];
+        $sql = $sql . " ORDER BY $tri ASC";
+    } else {
+        $tri = "nom";
+    }
+
+    $requete = $pdo->prepare($sql);
+    $requete->execute();
+
+    $pokemons = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-    <!--PARAMETERS AND RESOURCES (Fonts, CSS)-->
-    <title> À propos </title>
+    <title>Wishlist de Pokécartes</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet"> <!-- NOTO FONT -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <header>
         <button class="dark-mode-toggle" onclick="toggleDarkMode()">Dark Mode</button>
@@ -19,13 +36,14 @@
         <nav id="menu">
         <ul>
             <li><a href="index.html">Accueil</a></li>
-            <li><a a class="active" href="#subscribe">S'inscrire</a></li>
-            <li><a href="index.html#concept">Concept</a></li>
+            <li><a href="subscribe.html">S'inscrire</a></li>
+            <li><a class="active" href="index.php">Liste de souhaits</a></li>
+            <li><a href="#concept">Concept</a></li>
             <li><a href="list.html">Collection</a></li>
             <li><a href="about.html">À propos de moi</a></li>
-            <li><a href="contact.html">Me contacter</a></li>
+            <li><a href="about.html">Me contacter</a></li>
             <li><a href="faq.html">Faq</a></li>
-            <li><a href="subscribe-eng.html">
+            <li><a href="index-eng.html">
                 <img class="flag" src="images/Others/ukFlag.jpg" alt="English">
             </a></li>
         </ul>
@@ -34,57 +52,39 @@
     </header>
 
     <main>
-        <!-- FORM -->
-        <div class="form-container animForm">
-            <div class="message-error">
-            <ul></ul>
-            </div>
-            <div class="message-succes">
-            <h1>Formulaire envoyé!</h1>
-            </div>
+        <h1>Voici tes cartes dans ta liste de souhaits !</h1>
 
-            <form action="" method="POST" enctype="multipart/form-data">
-            <div>
-                <label for="pseudo">Pseudo</label>
-                <input type="text" name="pseudo" id="pseudo">
-            </div>
-
-            <div>
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email">
-            </div>
-
-            <div>
-                <label for="password">Mot de passe</label>
-                <input type="password" name="password" id="password">
-            </div>
-
-            <div>
-                <label for="password2">Entrer à nouveau le mot de passe</label>
-                <input type="password" name="password2" id="password2">
-            </div>
-
-            <div class="radio-group">
-                <p> Souhaitez-vous recevoir la newsletter sur votre mail ?</p>
-
-                <label>
-                    <input type="radio" name="newsletter" value="oui" id="oui"> Oui
-                </label>
-                
-                <label>
-                    <input type="radio" name="newsletter" value="non" id="non"> Non
-                </label>
-            </div>
-
-            <button type="submit">S'inscrire</button>
-            </form>
+        <div class="title">
+        <form method="GET" action="index.php">
+            <label>Trier par : </label>
+            <select name="tri" onchange="this.form.submit()">
+                    <option value="nom" <?php echo $tri === "nom" ? "selected" : "";?>>Nom</option>
+                    <option value="rang" <?php echo $tri === "rang" ? "selected" : "";?>>Rang</option>
+            </select>
+        </form>
         </div>
-        <div class="animLoader"></div>
-    </main>
 
+        <div>
+        <ul>
+        <?php
+            foreach ($pokemons as $pokemon) {
+                echo "<li>";
+                echo $pokemon["nom"] . " - " . $pokemon["rang"];
+                echo "<a href='delete.php?id=" . $pokemon["id"]. "' onclick=\"return confirm('Supprimer cette Pokécarte ?')\"> X </a>";
+                echo "<a href='update.php?id=" . $pokemon["id"] . "'> Modifier </a>";
+                echo "</li>";
+            }
+        ?>
+        </ul>
+        </div>
+
+        <div class="title">
+        <a href="create.php">Ajouter une nouvelle Pokécarte</a>
+        </div>
+    </main>
     <footer>
         <!-- FOOTER -->
-        <div class="footerAbout">
+        <div class="footer">
             <div class="divtitle">
                 <div class="footerFlex">
                     <p>Réseaux officiels de Pokémon :</p>
@@ -108,5 +108,4 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/SplitText.min.js"></script>
     <script src="main.js"></script>
 </body>
-
 </html>
