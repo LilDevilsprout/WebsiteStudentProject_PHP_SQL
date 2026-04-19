@@ -33,7 +33,6 @@
         <nav id="menu">
         <ul>
             <li><a href="index.html">Accueil</a></li>
-            <li><a href="subscribe.html">S'inscrire</a></li>
             <li><a href="index.php">Liste de souhaits</a></li>
             <li><a href="#concept">Concept</a></li>
             <li><a href="list.html">Collection</a></li>
