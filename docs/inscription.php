@@ -8,13 +8,13 @@ unset($_SESSION["erreur"]);
 <!DOCTYPE html>
 <html>
     <head>
-    <!--PARAMETERS AND RESOURCES (Fonts, CSS)-->
-    <title> PokéCartes </title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet"> <!-- NOTO FONT -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
-    <link rel="stylesheet" href="style.css">
+        <!--PARAMETERS AND RESOURCES (Fonts, CSS)-->
+        <title> PokéCartes </title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet"> <!-- NOTO FONT -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+        <link rel="stylesheet" href="style.css">
     </head>
 
     <body>
@@ -42,7 +42,7 @@ unset($_SESSION["erreur"]);
 
         <div class="form-container animForm">
             <div>
-                <h2 class="title">Connectez-vous !</h2>
+            <h2 class="title">Inscrivez-vous !</h2>
             </div>
 
             <div class="message-error <?= !empty($erreur) ? 'visible' : '' ?>">
@@ -53,17 +53,19 @@ unset($_SESSION["erreur"]);
                 </ul>
             </div>
             <div class="message-succes"></div>
-            
+
             <div>
-            <form action="login.php" method="POST">
+            <form action="register.php" method="POST">
+            <!-- <form action="inscription.php" method="POST"> -->
                 <label for="email">Email :</label>
                 <input type="email" id="email" name="email" required>
 
                 <label for="password">Mot de passe :</label>
                 <input type="password" id="password" name="password" required>
+
                 <div>
-                    <button type="button" onclick="window.location.href='inscription.php'">S'inscrire</button>
-                <button type="submit">Se connecter</button>
+                    <button type="button" onclick="window.location.href='connexion.php'">Se connecter</button>
+                    <button type="submit">S'inscrire</button>
                 </div>
 
                 <div class="animLoader"></div>
