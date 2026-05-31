@@ -51,7 +51,7 @@ function toggleAnswer(element) {
 
 // FORM
 
-let form = document.querySelector("form")
+let form = document.querySelector("#loginForm")
 if (form !== null){
 form.addEventListener("submit", function(event) {
     event.preventDefault();
@@ -138,3 +138,34 @@ document.addEventListener('DOMContentLoaded', function() {      //DOMContentLoad
         }
     }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    document.querySelectorAll(".cardsListName").forEach(card => {
+        const cardId = card.dataset.cardId;
+        const heart = card.querySelector(".favorite-btn");
+        
+        heart.textContent = "❤️";
+
+        if (favorites.includes(cardId)) {
+            heart.textContent = "❤️";
+        }
+        else {
+            heart.textContent = "🤍";
+        }
+
+        heart.addEventListener("click", () => {
+            if (favorites.includes(cardId)) {
+                favorites = favorites.filter(id => id !== cardId);
+                heart.textContent = "🤍"
+            }
+            else {
+                favorites.push(cardId);
+                heart.textContent = "❤️";
+            }
+
+            localStorage.setItem("favorites", JSON.stringify(favorites))
+        })
+    })
+})

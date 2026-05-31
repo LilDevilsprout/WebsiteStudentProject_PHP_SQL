@@ -2,7 +2,7 @@
 session_start();
 
 try {
-    $pdo = new PDO("mysql:host=localhost;dbname=exercice_login", "root", "");
+    $pdo = new PDO("mysql:host=localhost;dbname=pokecards", "root", "");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Erreur lors de la connexion à la BDO : ". $e->getMessage());
@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($email) && !empty($password)) {
 
         // Vérifier si l'email existe déjà    
-        $check = $pdo->prepare("SELECT id FROM utilisateurs WHERE email = :email");
+        $check = $pdo->prepare("SELECT id FROM users WHERE email = :email");
         $check->execute(["email" => $email]);
 
         if ($check->fetch()) {
@@ -29,10 +29,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
             //Insérer les données dans la base de données
-            $stmt = $pdo->prepare("INSERT INTO utilisateurs (email, mot_de_passe) VALUES (:email, :mot_de_passe)");
+            $stmt = $pdo->prepare("INSERT INTO users (email, password) VALUES (:email, :password)");
             $stmt->execute([
                 "email"=> $email,
-                "mot_de_passe"=> $hashedPassword
+                "password"=> $hashedPassword
             ]);
 
             // echo "Inscription réussie !";

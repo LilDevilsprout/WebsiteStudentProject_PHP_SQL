@@ -2,7 +2,7 @@
 session_start();
 
 try {
-    $pdo = new PDO("mysql:host=localhost;dbname=exercice_login", "root", "");
+    $pdo = new PDO("mysql:host=localhost;dbname=pokecards", "root", "");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Erreur lors de la connexion à la BDO : ". $e->getMessage());
@@ -12,12 +12,12 @@ $email = trim($_POST["email"]);
 $password = trim($_POST["password"]);
 
 //Requête pour vérifier si l'utilisateur existe en base
-$stmt = $pdo->prepare("SELECT id, mot_de_passe FROM utilisateurs WHERE email = :email");
+$stmt = $pdo->prepare("SELECT id, password FROM users WHERE email = :email");
 $stmt->execute([
     "email" => $email
     ]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
-$userHashedPassword = $user["mot_de_passe"];
+$userHashedPassword = $user["password"];
 
 if ($user && password_verify($password, $userHashedPassword)) {
     echo "Connexion réussie !";

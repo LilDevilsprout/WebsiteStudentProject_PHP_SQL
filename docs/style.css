@@ -622,3 +622,11 @@ body.dark-mode .logo {
         transform: translateY(30px)
     }
 }
+
+.favorite-btn {
+    cursor: pointer;
+    font-size: 30px;
+    display: block;
+    margin-bottom: 10px;
+    user-select: none;
+}

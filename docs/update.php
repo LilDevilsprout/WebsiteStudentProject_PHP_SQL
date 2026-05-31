@@ -49,10 +49,12 @@
         <ul>
             <li><a href="index.html">Accueil</a></li>
             <li><a href="index.php">Liste de souhaits</a></li>
+            <li><a href="connexion.php">Se connecter</a></li>
             <li><a href="#concept">Concept</a></li>
             <li><a href="list.html">Collection</a></li>
             <li><a href="about.html">À propos de moi</a></li>
             <li><a href="about.html">Me contacter</a></li>
+            <li><a href="logout.php">Se déconnecter</a></li>
             <li><a href="faq.html">Faq</a></li>
             <li><a href="index-eng.html">
                 <img class="flag" src="images/Others/ukFlag.jpg" alt="English">
