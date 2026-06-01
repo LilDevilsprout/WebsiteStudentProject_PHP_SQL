@@ -87,7 +87,7 @@ $types = implode(" / ", $types);
         <div>
             <h2>Informations :</h2>
             <p>Description : <?= htmlspecialchars($description) ?></p>
-            <p>Taille : <?= htmlspecialchars($height) ?>m; Poid : <?= htmlspecialchars($weight) ?>kg</p>
+            <p>Taille : <?= htmlspecialchars($height) ?>m; Poids : <?= htmlspecialchars($weight) ?>kg</p>
             <p>Type : <?= htmlspecialchars($types) ?></p>
         </div>
     </main>

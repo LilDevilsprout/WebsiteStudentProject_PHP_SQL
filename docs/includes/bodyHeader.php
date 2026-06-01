@@ -5,7 +5,6 @@
         <nav id="menu">
         <ul>
             <li><a href="index.php#home">Accueil</a></li>
-            <!-- <li><a href="index.php">Liste de souhaits</a></li> -->
             <li><a href="connexion.php">Se connecter</a></li>
             <li><a href="index.php#concept">Concept</a></li>
             <li><a href="list.php">Collection</a></li>

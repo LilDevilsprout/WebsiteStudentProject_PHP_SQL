@@ -26,7 +26,7 @@ if ($user && password_verify($password, $userHashedPassword)) {
     $_SESSION["email"] = $user["email"];
 
     // Redirection vers la page d'accueil
-    header("Location: index.html");
+    header("Location: index.php");
     exit();
 } else {
     echo "Email ou mot de passe incorrect.";
